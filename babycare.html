@@ -1,0 +1,843 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset='UTF-8'>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HealthCare Plus</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <style>
+        /* --- 1. Base Styles and Variables --- */
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #ffffff;
+            overflow-x: hidden;
+        }
+
+        :root {
+            --primary-green: #053229; 
+            --secondary-green: #355E58; 
+            --white: #fff;
+            --gray-text: #ccc;
+            --dark-text: #333;
+        }
+
+        /* --- 2. Main Header (Top Section) --- */
+        .main-header {
+            background-color: var(--primary-green);
+            height: 80px; 
+            padding: 0 5%; 
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo-delivery {
+            display: flex;
+            align-items: center;
+            color: var(--white);
+        }
+
+        .logo-text {
+            font-size: 20px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            color: var(--white); 
+        }
+
+        .logo-text .beta {
+            font-size: 10px;
+            font-weight: normal;
+            align-self: flex-end;
+            margin-left: 5px;
+            color: var(--gray-text);
+        }
+
+        .location-info {
+            font-size: 14px;
+            white-space: nowrap; 
+            margin-left: 20px;
+            color: var(--white);
+            opacity: 0.9;
+            display: none;
+        }
+        @media(min-width: 768px) { .location-info { display: block; } }
+
+        .search-container {
+            flex-grow: 1;
+            display: flex;
+            justify-content: center; 
+            margin: 0 30px; 
+        }
+
+        .search-box {
+            display: flex;
+            align-items: center;
+            background-color: var(--white);
+            border-radius: 4px; 
+            padding: 8px 15px;
+            width: 500px; 
+            max-width: 40vw; 
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        .search-box input {
+            border: none;
+            outline: none;
+            flex-grow: 1;
+            font-size: 14px;
+            padding: 0 10px;
+            color: var(--dark-text);
+        }
+
+        .search-box .icon {
+            color: #555;
+            font-size: 16px;
+        }
+.real-dropdown {
+    display: none;           /* Initially hidden */
+    position: absolute;
+    top: 100%;               
+    left: 0;                 /* Start same as search bar */
+    width: 550px;  /* Explicit width same as search-box */
+    max-width: 100%; /* Responsive */
+    background-color: #fff;
+    border-radius: 8px;      /* Rounded corners */
+    box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+    overflow: hidden;
+    z-index: 999;
+}
+
+/* Dropdown items */
+.real-dropdown div {
+    padding: 12px 15px;
+    font-size: 14px;
+    border-bottom: 1px solid #eee;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+/* Hover effect */
+.real-dropdown div:hover {
+    background-color: #f5f5f5;
+}
+
+/* Last item border removal */
+.real-dropdown div:last-child {
+    border-bottom: none;
+}
+
+
+
+        .user-actions {
+            display: flex;
+            align-items: center;
+            color: var(--white);
+        }
+
+        .user-actions a {
+            color: var(--white);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            font-size: 14px;
+            font-weight: 500;
+            margin-left: 25px; 
+        }
+
+        .user-actions a i { font-size: 22px; margin-right: 5px; }
+        .user-actions a span { white-space: nowrap; }
+
+        /* --- 3. Navigation Bar (Bottom Section) --- */
+        .nav-bar {
+            background-color: var(--secondary-green);
+            color: var(--white);
+            padding: 12px 5%;
+            overflow-x: auto;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            justify-content: space-between;
+            min-width: 800px;
+        }
+
+        .nav-links li {
+            font-size: 14px; 
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            transition: color 0.2s;
+            white-space: nowrap;
+            margin: 0 10px;
+        }
+
+        .nav-links li:hover { color: #fff8e1; }
+        .nav-links .icon { margin-right: 8px; font-size: 20px; }
+
+
+/* --- 8. PRODUCT GALLERY --- */
+        .gallery {
+            display: flex; 
+            width: 95%; 
+            max-width: 1400px;
+            justify-content: center;
+            margin: 0 auto 50px auto; /* Adjusted top margin for new header */
+            padding: 0 10px;
+        }
+
+        .content {
+            width: 260px; 
+            margin: 15px;
+            text-align: center;
+            border-radius: 20px;
+            cursor: pointer;
+            padding-top: 10px;
+            box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+            transition: all .4s;
+            background: #fff; 
+            display: flex; /* Added flex for internal layout */
+            flex-direction: column;
+        }
+
+        .content:hover {
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+            transform: translateY(-8px); 
+        }
+
+        .content img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 15px 15px 0 0;
+            margin: 0;
+        }
+
+        .content h3 { font-size: 22px; margin: 10px 0; color: #333; }
+        .content p { color: #5d6d7e; font-size: 14px; padding: 0 10px; flex-grow: 1; } /* Added flex-grow */
+        .content h6 { font-size: 20px; color: #222f3e; margin: 10px 0; }
+
+        .content ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            padding: 0;
+            margin-bottom: 10px;
+        }
+        .content li { padding: 2px; }
+        .checked { color: #ff9f43; }
+        
+        /* --- DUAL BUTTON STYLES (NEW) --- */
+        .product-actions {
+            display: flex; /* Makes buttons line up horizontally */
+            width: 100%;
+            margin-top: auto; /* Pushes the actions block to the bottom of the content card */
+        }
+
+        button.buy-btn, button.add-to-cart-btn {
+            text-align: center;
+            font-size: 16px; 
+            color: #fff;
+            flex-grow: 1; /* Makes each button take up equal space */
+            padding: 10px 15px; 
+            border: 0;
+            cursor: pointer;
+            margin: 0; 
+            border-radius: 0; 
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+
+        /* Custom styles for the "Add to Cart" button (MODIFIED TO GREY) */
+        button.add-to-cart-btn {
+            background-color: #333333; /* Light Grey Background */
+            color: white; /* Darker text for contrast */
+            border-left: 1px solid #ccc; /* Lighter border separator */
+        }
+
+        /* Hover effects (MODIFIED FOR GREY BUTTON) */
+        button.add-to-cart-btn:hover {
+            background-color: #e0e0e0; /* Slightly darker grey on hover */
+        }
+        button.buy-btn:hover {
+            filter: brightness(1.1);
+        }
+
+        /* Re-apply the bottom border radius to the appropriate button */
+        .product-actions button:first-child {
+            border-bottom-left-radius: 20px;
+        }
+        .product-actions button:last-child {
+            border-bottom-right-radius: 20px;
+        }
+        
+        /* Color classes for buttons */
+        .buy-1 { background: #2183a2; }
+        .buy-2 { background: #3b3e6e; }
+        .buy-3 { background: #3e3ebb; }
+        .buy-4 { background: #ff9f43; }
+
+        @media(max-width: 768px) {
+            .slider-wrapper { height: 200px; }
+            .content { width: 100%; }
+            .store-card { min-width: 200px; height: 280px; }
+            .cat-card-modern { min-width: 140px; height: 160px; }
+        }
+
+.section-header {
+            width: 95%;
+            max-width: 1400px;
+            margin: 20px auto 15px auto;
+            color: #333;
+        }
+        .section-header h2 {
+            font-size: 24px;
+            font-weight: 700;
+            margin: 0;
+        }
+
+
+
+
+
+
+.nav-links a {
+    color: white;          /* text white */
+    text-decoration: none; /* underline remove */
+    display: flex;
+    align-items: center;
+}
+
+
+
+
+
+    </style>
+</head>
+
+
+<body>
+
+<header>
+    <div class="main-header">
+        <div class="logo-delivery">
+            <div class="logo-text">
+                <i class="fas fa-house-chimney-medical" style="color: white; font-size: 30px; margin-right: 5px;"></i>
+                HealthCare <span class="beta">Plus</span>
+            </div>
+            <div class="location-info" id="deliveryLocation">
+                <i class="fas fa-map-marker-alt"></i> Deliver to Loading Address...
+            </div>          
+        </div>
+
+        <div class="search-container">
+            <div class="search-box">
+                <i class="fas fa-search icon"></i> 
+                <input type="text" placeholder="Search for medicines, lab tests, doctors & beauty">
+<div class="real-dropdown" id="searchDropdown">
+    <div onclick="goToPage('medicine.html')">Medicine</div>
+    <div onclick="goToPage('babycare.html')">Baby Care</div>
+    <div onclick="goToPage('beauty.html')">Beauty</div>
+    <div onclick="goToPage('elderlycare.html')">Elderly Care</div>
+    <div onclick="goToPage('health.html')">Health</div>
+</div>
+
+            </div>
+        </div>
+        
+        <div class="user-actions">
+            <a href="cart.html" class="cart-icon">
+    <i class="fa fa-shopping-cart"></i>
+    <span id="cart-count">0</span>
+</a>
+
+            <a href="Registration Form.html" class="sign-in-link"><i class="fas fa-user"></i><span>Sign In</span></a>
+        </div>
+    </div>
+
+    <div class="nav-bar">
+<ul class="nav-links">
+<li><a href="main.html"><i class="fas fa-list-ul icon"></i>All Categories</a></li>
+<li><a href="medicine.html"><i class="fas fa-capsules icon"></i>Medicine</a></li>
+<li><a href="babycare.html"><i class="fas fa-baby-carriage icon"></i>Baby Care</a></li>
+<li><a href="beauty.html"><i class="fas fa-pump-soap icon"></i>Beauty</a></li>
+<li><a href="elderlycare.html"><i class="fas fa-blind icon"></i>Elderly Care</a></li>
+<li><a href="health.html"><i class="fas fa-plus icon"></i>Health Corner</a></li>
+<li><a href="terms.html"><i class="fas fa-file-contract icon"></i>Terms & Conditions</a>
+</ul>
+</div>
+
+</header>
+
+
+<div class="section-header">
+    <h2>Baby Essentials</h2>
+</div>
+<div class="gallery">
+    <div class="content">
+        <img src="bab1.jpg">
+        <h3>Baby Diapers</h3>
+        <p>Daily diaper use </p>
+        <h6>RS.500.00</h6>
+        <ul>
+            <li><i class="fa fa-star checked"></i></li>
+            <li><i class="fa fa-star checked"></i></li>
+            <li><i class="fa fa-star checked"></i></li>
+            <li><i class="fa fa-star checked"></i></li>
+            <li><i class="fa fa-star"></i></li>
+        </ul>
+        <div class="product-actions">
+            <button class="buy-btn buy-1" onclick="buySingleProduct()">Buy Now</button>
+            <button class="add-to-cart-btn buy-1" 
+    data-name="Baby Diapers"
+    data-price="500"
+    data-image="bab1.jpg">Add to Cart</button>
+        </div>
+    </div>
+    
+    <div class="content">
+        <img src="bab2.jpg">
+        <h3>Baby Wipes</h3>
+        <p>Cleaning & hygiene</p>
+        <h6>RS.150.00</h6>
+        <ul>
+            <li><i class="fa fa-star checked"></i></li>
+            <li><i class="fa fa-star checked"></i></li>
+            <li><i class="fa fa-star checked"></i></li>
+            <li><i class="fa fa-star checked"></i></li>
+            <li><i class="fa fa-star"></i></li>
+        </ul>
+        <div class="product-actions">
+            <button class="buy-btn buy-4" onclick="buySingleProduct()">Buy Now</button>
+            <button class="add-to-cart-btn buy-4" 
+    data-name="Baby Wipes"
+    data-price="150"
+    data-image="bab2.jpg">Add to Cart</button>
+        </div>
+    </div>
+
+
+    <div class="content">
+        <img src="bab3.jpg">
+        <h3>Baby Massage Oil</h3>
+        <p>Daily body massage</p>
+        <h6>RS.120.00</h6>
+        <ul>
+            <li><i class="fa fa-star checked"></i></li>
+            <li><i class="fa fa-star checked"></i></li>
+            <li><i class="fa fa-star checked"></i></li>
+            <li><i class="fa fa-star checked"></i></li>
+            <li><i class="fa fa-star"></i></li>
+        </ul>
+        <div class="product-actions">
+            <button class="buy-btn buy-2" onclick="buySingleProduct()">Buy Now</button>
+            <button class="add-to-cart-btn buy-2" 
+    data-name="Baby Massage Oil"
+    data-price="120"
+    data-image="bab3.jpg">Add to Cart</button>
+        </div>
+    </div>
+
+    <div class="content">
+        <img src="bab4.jpg">
+        <h3>Baby Soap</h3>
+        <p>Gentle bathing</p>
+        <h6>RS.90.00</h6>
+        <ul>
+            <li><i class="fa fa-star checked"></i></li>
+            <li><i class="fa fa-star checked"></i></li>
+            <li><i class="fa fa-star checked"></i></li>
+            <li><i class="fa fa-star checked"></i></li>
+            <li><i class="fa fa-star"></i></li>
+        </ul>
+        <div class="product-actions">
+            <button class="buy-btn buy-4" onclick="buySingleProduct()">Buy Now</button>
+            <button class="add-to-cart-btn buy-4" 
+    data-name="Baby Soap"
+    data-price="90"
+    data-image="bab4.jpg">Add to Cart</button>
+        </div>
+    </div>
+    
+    <div class="content">
+        <img src="bab5.jpg">
+        <h3>Baby Lotion</h3>
+        <p>Moisturizes skin</p>
+        <h6>RS.280.00</h6>
+        <ul>
+            <li><i class="fa fa-star checked"></i></li>
+            <li><i class="fa fa-star checked"></i></li>
+            <li><i class="fa fa-star checked"></i></li>
+            <li><i class="fa fa-star checked"></i></li>
+            <li><i class="fa fa-star"></i></li>
+        </ul>
+        <div class="product-actions">
+            <button class="buy-btn buy-3" onclick="buySingleProduct()">Buy Now</button>
+            <button class="add-to-cart-btn buy-3" 
+    data-name="Baby Lotion"
+    data-price="280"
+    data-image="bab5.jpg">Add to Cart</button>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="section-header">
+    <h2>Baby Hygiene & Skin Care</h2>
+</div>
+<div class="gallery">
+    <div class="content">
+        <img src="bab6.jpg">
+        <h3>Diaper Rash Cream</h3>
+        <p>Treats diaper rashes</p>
+        <h6>RS.150.00</h6>
+        <ul>
+            <li><i class="fa fa-star checked"></i></li>
+            <li><i class="fa fa-star checked"></i></li>
+            <li><i class="fa fa-star checked"></i></li>
+            <li><i class="fa fa-star checked"></i></li>
+            <li><i class="fa fa-star"></i></li>
+        </ul>
+        <div class="product-actions">
+            <button class="buy-btn buy-1" onclick="buySingleProduct()">Buy Now</button>
+            <button class="add-to-cart-btn buy-1" 
+    data-name="Diaper Rash Cream"
+    data-price="150"
+    data-image="bab6.jpg">Add to Cart</button>
+        </div>
+    </div>
+    
+    <div class="content">
+        <img src="bab7.jpg">
+        <h3>Baby Powder</h3>
+        <p>Keeps skin dry & soft</p>
+        <h6>RS.90.00</h6>
+        <ul>
+            <li><i class="fa fa-star checked"></i></li>
+            <li><i class="fa fa-star checked"></i></li>
+            <li><i class="fa fa-star checked"></i></li>
+            <li><i class="fa fa-star checked"></i></li>
+            <li><i class="fa fa-star"></i></li>
+        </ul>
+        <div class="product-actions">
+            <button class="buy-btn buy-4" onclick="buySingleProduct()">Buy Now</button>
+            <button class="add-to-cart-btn buy-4" 
+    data-name="Baby Powder"
+    data-price="90"
+    data-image="bab7.jpg">Add to Cart</button>
+        </div>
+    </div>
+
+
+    <div class="content">
+        <img src="bab8.jpg">
+        <h3>Baby Shampoo (Tear-Free)</h3>
+        <p>Gentle hair wash</p>
+        <h6>RS.120.00</h6>
+        <ul>
+            <li><i class="fa fa-star checked"></i></li>
+            <li><i class="fa fa-star checked"></i></li>
+            <li><i class="fa fa-star checked"></i></li>
+            <li><i class="fa fa-star checked"></i></li>
+            <li><i class="fa fa-star"></i></li>
+        </ul>
+        <div class="product-actions">
+            <button class="buy-btn buy-2" onclick="buySingleProduct()">Buy Now</button>
+            <button class="add-to-cart-btn buy-2" 
+    data-name="Baby Shampoo (Tear-Free)"
+    data-price="120"
+    data-image="bab8.jpg">Add to Cart</button>
+        </div>
+    </div>
+
+    <div class="content">
+        <img src="bab9.jpg">
+        <h3>Baby Nail Cutter Set</h3>
+        <p>Safe trimming</p>
+        <h6>RS.180.00</h6>
+        <ul>
+            <li><i class="fa fa-star checked"></i></li>
+            <li><i class="fa fa-star checked"></i></li>
+            <li><i class="fa fa-star checked"></i></li>
+            <li><i class="fa fa-star checked"></i></li>
+            <li><i class="fa fa-star"></i></li>
+        </ul>
+        <div class="product-actions">
+            <button class="buy-btn buy-4" onclick="buySingleProduct()">Buy Now</button>
+            <button class="add-to-cart-btn buy-4" 
+    data-name="Baby Nail Cutter Set"
+    data-price="180"
+    data-image="bab9.jpg">Add to Cart</button>
+        </div>
+    </div>
+    
+    <div class="content">
+        <img src="bab10.jpg">
+        <h3>Baby Cream / Moisturizer</h3>
+        <p>Hydrates delicate skin</p>
+        <h6>RS.300.00</h6>
+        <ul>
+            <li><i class="fa fa-star checked"></i></li>
+            <li><i class="fa fa-star checked"></i></li>
+            <li><i class="fa fa-star checked"></i></li>
+            <li><i class="fa fa-star checked"></i></li>
+            <li><i class="fa fa-star"></i></li>
+        </ul>
+        <div class="product-actions">
+            <button class="buy-btn buy-3" onclick="buySingleProduct()">Buy Now</button>
+            <button class="add-to-cart-btn buy-3" 
+    data-name="Baby Cream / Moisturizer"
+    data-price="300"
+    data-image="bab10.jpg">Add to Cart</button>
+        </div>
+    </div>
+</div>
+
+
+<div class="section-header">
+    <h2>Feeding & Nutrition</h2>
+</div>
+<div class="gallery">
+    <div class="content">
+        <img src="bab11.jpg">
+        <h3>Feeding Bottle (Anti-Colic)</h3>
+        <p>Milk feeding </p>
+        <h6>RS.150.00</h6>
+        <ul>
+            <li><i class="fa fa-star checked"></i></li>
+            <li><i class="fa fa-star checked"></i></li>
+            <li><i class="fa fa-star checked"></i></li>
+            <li><i class="fa fa-star checked"></i></li>
+            <li><i class="fa fa-star"></i></li>
+        </ul>
+        <div class="product-actions">
+            <button class="buy-btn buy-1" onclick="buySingleProduct()">Buy Now</button>
+            <button class="add-to-cart-btn buy-1" 
+    data-name="Feeding Bottle (Anti-Colic)"
+    data-price="150"
+    data-image="bab11.jpg">Add to Cart</button>
+        </div>
+    </div>
+    
+    <div class="content">
+        <img src="bab12.jpg">
+        <h3>Bottle Sterilizer Liquid</h3>
+        <p>Bottle hygiene</p>
+        <h6>RS.250.00</h6>
+        <ul>
+            <li><i class="fa fa-star checked"></i></li>
+            <li><i class="fa fa-star checked"></i></li>
+            <li><i class="fa fa-star checked"></i></li>
+            <li><i class="fa fa-star checked"></i></li>
+            <li><i class="fa fa-star"></i></li>
+        </ul>
+        <div class="product-actions">
+            <button class="buy-btn buy-4" onclick="buySingleProduct()">Buy Now</button>
+            <button class="add-to-cart-btn buy-2" 
+    data-name="Bottle Sterilizer Liquid"
+    data-price="250"
+    data-image="bab12.jpg">Add to Cart</button>
+        </div>
+    </div>
+
+
+    <div class="content">
+        <img src="bab13.jpg">
+        <h3>Baby Formula Milk</h3>
+        <p>Baby nutrition</p>
+        <h6>RS.650.00</h6>
+        <ul>
+            <li><i class="fa fa-star checked"></i></li>
+            <li><i class="fa fa-star checked"></i></li>
+            <li><i class="fa fa-star checked"></i></li>
+            <li><i class="fa fa-star checked"></i></li>
+            <li><i class="fa fa-star"></i></li>
+        </ul>
+        <div class="product-actions">
+            <button class="buy-btn buy-2" onclick="buySingleProduct()">Buy Now</button>
+            <button class="add-to-cart-btn buy-2"
+    data-name="Baby Formula Milk"
+    data-price="650"
+    data-image="bab13.jpg">
+    Add to Cart
+</button>
+        </div>
+    </div>
+
+    <div class="content">
+        <img src="bab14.jpg">
+        <h3>Baby Feeding Spoon Set</h3>
+        <p>Safe feeding</p>
+        <h6>RS.180.00</h6>
+        <ul>
+            <li><i class="fa fa-star checked"></i></li>
+            <li><i class="fa fa-star checked"></i></li>
+            <li><i class="fa fa-star checked"></i></li>
+            <li><i class="fa fa-star checked"></i></li>
+            <li><i class="fa fa-star"></i></li>
+        </ul>
+        <div class="product-actions">
+            <button class="buy-btn buy-4" onclick="buySingleProduct()">Buy Now</button>
+            <button class="add-to-cart-btn buy-4"
+    data-name="Baby Feeding Spoon Set"
+    data-price="180"
+    data-image="bab14.jpg">
+    Add to Cart
+</button>
+        </div>
+    </div>
+    
+    <div class="content">
+        <img src="bab15.jpg">
+        <h3>Baby Vitamin D Drops</h3>
+        <p>Bone development</p>
+        <h6>RS.180.00</h6>
+        <ul>
+            <li><i class="fa fa-star checked"></i></li>
+            <li><i class="fa fa-star checked"></i></li>
+            <li><i class="fa fa-star checked"></i></li>
+            <li><i class="fa fa-star checked"></i></li>
+            <li><i class="fa fa-star"></i></li>
+        </ul>
+        <div class="product-actions">
+            <button class="buy-btn buy-3" onclick="buySingleProduct()">Buy Now</button>
+            <button class="add-to-cart-btn buy-3"
+    data-name="Baby Vitamin D Drops"
+    data-price="180"
+    data-image="bab15.jpg">
+    Add to Cart
+</button>
+        </div>
+    </div>
+</div>
+
+
+<script>
+
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+// SAVE CART
+function saveCart() {
+    localStorage.setItem("cart", JSON.stringify(cart));
+}
+
+// UPDATE CART COUNT ON NAVBAR
+function updateCartCount() {
+    const totalQty = cart.reduce((sum, item) => sum + item.quantity, 0);
+    document.getElementById("cart-count").innerText = totalQty;
+}
+
+// ADD TO CART BUTTON CLICK
+document.querySelectorAll(".add-to-cart-btn").forEach(btn => {
+    btn.addEventListener("click", function () {
+
+        let name = this.dataset.name;
+        let price = Number(this.dataset.price);
+        let image = this.dataset.image;
+
+        let existing = cart.find(p => p.name === name);
+
+        if (existing) {
+            existing.quantity += 1;
+        } else {
+            cart.push({
+                name: name,
+                price: price,
+                image: image,
+                quantity: 1
+            });
+        }
+
+        saveCart();
+        updateCartCount();
+
+        alert(name + " added to cart!");
+    });
+});
+
+// RUN ON PAGE OPEN
+updateCartCount();
+
+
+
+
+    document.addEventListener('DOMContentLoaded', function() {
+        
+        function getQueryParam(name) {
+        name = name.replace(/[\[\]]/g, '\\$&');
+        var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+            results = regex.exec(window.location.href);
+        if (!results) return null;
+        if (!results[2]) return '';
+        return decodeURIComponent(results[2].replace(/\+/g, ' '));
+    }
+
+    var deliveryAddress = getQueryParam('deliveryAddress');
+
+    if (deliveryAddress) {
+        localStorage.setItem("deliveryAddress", deliveryAddress);
+    } else {
+        
+        deliveryAddress = localStorage.getItem("deliveryAddress");
+    }
+
+    var locationElement = document.getElementById('deliveryLocation');
+
+    if (locationElement && deliveryAddress) {
+        locationElement.innerHTML = 
+            '<i class="fas fa-map-marker-alt"></i> Deliver to <b>' + deliveryAddress + '</b>';
+    } else if (locationElement) {
+        locationElement.innerHTML = 
+            '<i class="fas fa-map-marker-alt"></i> Deliver to <b>Select Location</b>';
+    }
+
+});
+
+function buySingleProduct() {
+    let deliveryDate = "Tuesday, 9 April";
+
+    alert(
+        "🎉 Order Successful!\n\n" +
+        "Your selected items have been placed successfully.\n" +
+        "(Cash on Delivery)\n" +
+        "Estimated Delivery: " + deliveryDate
+    );
+}
+
+const searchInput = document.querySelector(".search-box input");
+const dropdown = document.getElementById("searchDropdown");
+
+// Show dropdown on click
+searchInput.addEventListener("click", () => {
+    dropdown.style.display = "block";
+});
+
+// Hide dropdown when clicking outside
+document.addEventListener("click", function(event) {
+    if (!event.target.closest(".search-container") &&
+        !event.target.closest("#searchDropdown")) {
+        dropdown.style.display = "none";
+    }
+});
+
+// Redirect to pages
+function goToPage(page) {
+    window.location.href = page;
+}
+
+
+
+</script>
+
+
+</body>
+</html>
