@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset='UTF-8'>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HealthCare Plus</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <style>
+        /* --- 1. Base Styles and Variables --- */
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #ffffff;
+            overflow-x: hidden;
+        }
+
+        :root {
+            --primary-green: #053229; 
+            --secondary-green: #355E58; 
+            --white: #fff;
+            --gray-text: #ccc;
+            --dark-text: #333;
+        }
+
+        /* --- 2. Main Header (Top Section) --- */
+        .main-header {
+            background-color: var(--primary-green);
+            height: 80px; 
+            padding: 0 5%; 
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo-delivery {
+            display: flex;
+            align-items: center;
+            color: var(--white);
+        }
+
+        .logo-text {
+            font-size: 20px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            color: var(--white); 
+        }
+
+        .logo-text .beta {
+            font-size: 10px;
+            font-weight: normal;
+            align-self: flex-end;
+            margin-left: 5px;
+            color: var(--gray-text);
+        }
+
+        .location-info {
+            font-size: 14px;
+            white-space: nowrap; 
+            margin-left: 20px;
+            color: var(--white);
+            opacity: 0.9;
+            display: none;
+        }
+        @media(min-width: 768px) { .location-info { display: block; } }
+
+        .search-container {
+            flex-grow: 1;
+            display: flex;
+            justify-content: center; 
+            margin: 0 30px; 
+        }
+
+        .search-box {
+            display: flex;
+            align-items: center;
+            background-color: var(--white);
+            border-radius: 4px; 
+            padding: 8px 15px;
+            width: 500px; 
+            max-width: 40vw; 
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        .search-box input {
+            border: none;
+            outline: none;
+            flex-grow: 1;
+            font-size: 14px;
+            padding: 0 10px;
+            color: var(--dark-text);
+        }
+
+        .search-box .icon {
+            color: #555;
+            font-size: 16px;
+        }
+.real-dropdown {
+    display: none;           /* Initially hidden */
+    position: absolute;
+    top: 100%;               
+    left: 0;                 /* Start same as search bar */
+    width: 550px;  /* Explicit width same as search-box */
+    max-width: 100%; /* Responsive */
+    background-color: #fff;
+    border-radius: 8px;      /* Rounded corners */
+    box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+    overflow: hidden;
+    z-index: 999;
+}
+
+/* Dropdown items */
+.real-dropdown div {
+    padding: 12px 15px;
+    font-size: 14px;
+    border-bottom: 1px solid #eee;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+/* Hover effect */
+.real-dropdown div:hover {
+    background-color: #f5f5f5;
+}
+
+/* Last item border removal */
+.real-dropdown div:last-child {
+    border-bottom: none;
+}
+
+
+
+        .user-actions {
+            display: flex;
+            align-items: center;
+            color: var(--white);
+        }
+
+        .user-actions a {
+            color: var(--white);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            font-size: 14px;
+            font-weight: 500;
+            margin-left: 25px; 
+        }
+
+        .user-actions a i { font-size: 22px; margin-right: 5px; }
+        .user-actions a span { white-space: nowrap; }
+
+        /* --- 3. Navigation Bar (Bottom Section) --- */
+        .nav-bar {
+            background-color: var(--secondary-green);
+            color: var(--white);
+            padding: 12px 5%;
+            overflow-x: auto;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            justify-content: space-between;
+            min-width: 800px;
+        }
+
+        .nav-links li {
+            font-size: 14px; 
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            transition: color 0.2s;
+            white-space: nowrap;
+            margin: 0 10px;
+        }
+
+        .nav-links li:hover { color: #fff8e1; }
+        .nav-links .icon { margin-right: 8px; font-size: 20px; }
+
+.section-header {
+            width: 95%;
+            max-width: 1400px;
+            margin: 20px auto 15px auto;
+            color: #333;
+        }
+        .section-header h2 {
+            font-size: 24px;
+            font-weight: 700;
+            margin: 0;
+        }
+
+
+
+
+.nav-links a {
+    color: white;          /* text white */
+    text-decoration: none; /* underline remove */
+    display: flex;
+    align-items: center;
+}
+
+
+/* --- Terms & Conditions Box --- */
+.terms-section {
+    width: 90%;
+    max-width: 900px;
+    background: #fff;
+    margin: 30px auto;
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    color: #333;
+}
+
+.terms-section h2 {
+    margin: 0 0 15px 0;
+    font-size: 22px;
+    color: var(--primary-green);
+}
+
+.terms-section p {
+    line-height: 1.6;
+    font-size: 14px;
+}
+
+.terms-section ul {
+    padding-left: 20px;
+    margin-top: 10px;
+}
+
+.terms-section ul li {
+    margin-bottom: 8px;
+    font-size: 14px;
+}
+
+.terms-section .highlight {
+    font-weight: bold;
+    color: var(--secondary-green);
+}
+
+</style>
+</head>
+
+
+<body>
+
+<header>
+    <div class="main-header">
+        <div class="logo-delivery">
+            <div class="logo-text">
+                <i class="fas fa-house-chimney-medical" style="color: white; font-size: 30px; margin-right: 5px;"></i>
+                HealthCare <span class="beta">Plus</span>
+            </div>
+            <div class="location-info" id="deliveryLocation">
+                <i class="fas fa-map-marker-alt"></i> Deliver to Loading Address...
+            </div>          
+        </div>
+
+        <div class="search-container">
+            <div class="search-box">
+                <i class="fas fa-search icon"></i> 
+                <input type="text" placeholder="Search for medicines, lab tests, doctors & beauty">
+<div class="real-dropdown" id="searchDropdown">
+    <div onclick="goToPage('medicine.html')">Medicine</div>
+    <div onclick="goToPage('babycare.html')">Baby Care</div>
+    <div onclick="goToPage('beauty.html')">Beauty</div>
+    <div onclick="goToPage('elderlycare.html')">Elderly Care</div>
+    <div onclick="goToPage('health.html')">Health</div>
+</div>
+
+            </div>
+        </div>
+        
+        <div class="user-actions">
+            <a href="cart.html" class="cart-icon">
+    <i class="fa fa-shopping-cart"></i>
+    <span id="cart-count">0</span>
+</a>
+            <a href="Registration Form.html" class="sign-in-link"><i class="fas fa-user"></i><span>Sign In</span></a>
+        </div>
+    </div>
+
+    <div class="nav-bar">
+<ul class="nav-links">
+<li><a href="main(starting pg).html"><i class="fas fa-list-ul icon"></i>All Categories</a></li>
+<li><a href="medicine.html"><i class="fas fa-capsules icon"></i>Medicine</a></li>
+<li><a href="babycare.html"><i class="fas fa-baby-carriage icon"></i>Baby Care</a></li>
+<li><a href="beauty.html"><i class="fas fa-pump-soap icon"></i>Beauty</a></li>
+<li><a href="elderlycare.html"><i class="fas fa-blind icon"></i>Elderly Care</a></li>
+<li><a href="health.html"><i class="fas fa-plus icon"></i>Health Corner</a></li>
+<li><a href="terms.html"><i class="fas fa-file-contract icon"></i>Terms & Conditions</a></li>
+</ul>
+</div>
+
+</header>
+
+<section class="terms-section">
+    <h2>Terms & Conditions</h2>
+
+    <p>
+        Welcome to <span class="highlight">HealthCare Plus</span>. By accessing or using our 
+        platform, you agree to follow the Terms & Conditions mentioned below.
+    </p>
+
+    <h3>1. General Usage</h3>
+    <ul>
+        <li>You must be at least 18 years old to use this website.</li>
+        <li>Information provided on the website is for general healthcare purposes only.</li>
+        <li>We reserve the right to update or modify the platform anytime.</li>
+    </ul>
+
+    <h3>2. Orders & Payments</h3>
+    <ul>
+        <li>All orders placed are subject to availability.</li>
+        <li>Prices may change based on discounts or offers.</li>
+        <li>Once an order is confirmed, it cannot be cancelled after processing.</li>
+    </ul>
+
+    <h3>3. Delivery Policy</h3>
+    <ul>
+        <li>Delivery time may vary based on your location.</li>
+        <li>We are not responsible for delays caused by external factors.</li>
+        <li>Incorrect address may lead to failed or delayed delivery.</li>
+    </ul>
+
+    <h3>4. Return & Refund</h3>
+    <ul>
+        <li>Opened or used medical products cannot be returned.</li>
+        <li>Refund is eligible only for damaged or wrong products.</li>
+        <li>Refund will be processed within 5–7 business days.</li>
+    </ul>
+
+    <h3>5. Privacy & Data Protection</h3>
+    <ul>
+        <li>Your personal data is stored securely.</li>
+        <li>We do not share your information with third parties without permission.</li>
+    </ul>
+
+    <p>
+        By continuing to use <span class="highlight">HealthCare Plus</span>, you accept these Terms & Conditions.
+    </p>
+
+</section>
+
+<script>
+
+
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+// SAVE CART
+function saveCart() {
+    localStorage.setItem("cart", JSON.stringify(cart));
+}
+
+// UPDATE CART COUNT ON NAVBAR
+function updateCartCount() {
+    const totalQty = cart.reduce((sum, item) => sum + item.quantity, 0);
+    document.getElementById("cart-count").innerText = totalQty;
+}
+
+// ADD TO CART BUTTON CLICK
+document.querySelectorAll(".add-to-cart-btn").forEach(btn => {
+    btn.addEventListener("click", function () {
+
+        let name = this.dataset.name;
+        let price = Number(this.dataset.price);
+        let image = this.dataset.image;
+
+        let existing = cart.find(p => p.name === name);
+
+        if (existing) {
+            existing.quantity += 1;
+        } else {
+            cart.push({
+                name: name,
+                price: price,
+                image: image,
+                quantity: 1
+            });
+        }
+
+        saveCart();
+        updateCartCount();
+
+        alert(name + " added to cart!");
+    });
+});
+
+// RUN ON PAGE OPEN
+updateCartCount();
+
+
+
+
+    document.addEventListener('DOMContentLoaded', function() {
+        
+        function getQueryParam(name) {
+        name = name.replace(/[\[\]]/g, '\\$&');
+        var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+            results = regex.exec(window.location.href);
+        if (!results) return null;
+        if (!results[2]) return '';
+        return decodeURIComponent(results[2].replace(/\+/g, ' '));
+    }
+
+    var deliveryAddress = getQueryParam('deliveryAddress');
+
+    
+    if (deliveryAddress) {
+        localStorage.setItem("deliveryAddress", deliveryAddress);
+    } else {
+                deliveryAddress = localStorage.getItem("deliveryAddress");
+    }
+
+    var locationElement = document.getElementById('deliveryLocation');
+
+    if (locationElement && deliveryAddress) {
+        locationElement.innerHTML = 
+            '<i class="fas fa-map-marker-alt"></i> Deliver to <b>' + deliveryAddress + '</b>';
+    } else if (locationElement) {
+        locationElement.innerHTML = 
+            '<i class="fas fa-map-marker-alt"></i> Deliver to <b>Select Location</b>';
+    }
+
+});
+
+const searchInput = document.querySelector(".search-box input");
+const dropdown = document.getElementById("searchDropdown");
+
+// Show dropdown on click
+searchInput.addEventListener("click", () => {
+    dropdown.style.display = "block";
+});
+
+// Hide dropdown when clicking outside
+document.addEventListener("click", function(event) {
+    if (!event.target.closest(".search-container") &&
+        !event.target.closest("#searchDropdown")) {
+        dropdown.style.display = "none";
+    }
+});
+
+// Redirect to pages
+function goToPage(page) {
+    window.location.href = page;
+}
+
+
+</script>
+
+
+</body>
+</html>
