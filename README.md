@@ -68,3 +68,4 @@ This project is ideal for showcasing web development skills using HTML, CSS, and
 🎥 Demo Video
 Below is a demonstration video showcasing the complete flow of the HealthCare Plus online medical store, including the Home page, product categories (Medicine, Baby Care, Beauty, Elderly Care, Health Corner), cart management, and user authentication (Registration , Login, Forgot Password). The demo highlights the product browsing experience, adding items to the cart, UI transitions, responsive design, and overall functionality of the website.
 
+https://drive.google.com/file/d/1fUAAenY_Aqcc8g1ppEIY3sMNxv1fuEDW/view?usp=sharing
