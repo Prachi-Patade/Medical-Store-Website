@@ -38,7 +38,7 @@ The website focuses on user-friendly navigation, product browsing, and cart mana
 -Dynamic cart showing added products
 -Quantity adjustments and total price calculation
 9. Authentication Flow
--Sign Up Page (signup.html) – New user registration
+-Registration Page (registration page.html) – New user registration
 -Login Page (login.html) – Existing user login
 -Forgot Password Page (forgot.html) – Password reset
 
@@ -66,5 +66,5 @@ Responsive and visually appealing design
 This project is ideal for showcasing web development skills using HTML, CSS, and JavaScript.
 
 🎥 Demo Video
-Below is a demonstration video showcasing the complete flow of the HealthCare Plus online medical store, including the Home page, product categories (Medicine, Baby Care, Beauty, Elderly Care, Health Corner), cart management, and user authentication (Sign Up, Login, Forgot Password). The demo highlights the product browsing experience, adding items to the cart, UI transitions, responsive design, and overall functionality of the website.
+Below is a demonstration video showcasing the complete flow of the HealthCare Plus online medical store, including the Home page, product categories (Medicine, Baby Care, Beauty, Elderly Care, Health Corner), cart management, and user authentication (Registration , Login, Forgot Password). The demo highlights the product browsing experience, adding items to the cart, UI transitions, responsive design, and overall functionality of the website.
 
