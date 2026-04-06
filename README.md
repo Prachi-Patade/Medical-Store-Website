@@ -1,6 +1,6 @@
 HealthCare Plus – Online Medical Store
 
-Project Overview
+⭐Project Overview
 HealthCare Plus is a comprehensive online medical store platform designed to provide users a seamless shopping experience for medicines, wellness products, baby care, beauty, and elderly care essentials. 
 The website focuses on user-friendly navigation, product browsing, and cart management while maintaining a clean and professional UI.
 
@@ -42,7 +42,7 @@ The website focuses on user-friendly navigation, product browsing, and cart mana
 -Login Page (login.html) – Existing user login
 -Forgot Password Page (forgot.html) – Password reset
 
-Key Functionalities
+⭐Key Functionalities
 1. Dynamic Cart Management
 -Users can add products to cart from any page
 -Quantity automatically updated for duplicate products
@@ -64,3 +64,7 @@ Dynamic cart functionality
 User-friendly interface
 Responsive and visually appealing design
 This project is ideal for showcasing web development skills using HTML, CSS, and JavaScript.
+
+🎥 Demo Video
+Below is a demonstration video showcasing the complete flow of the HealthCare Plus online medical store, including the Home page, product categories (Medicine, Baby Care, Beauty, Elderly Care, Health Corner), cart management, and user authentication (Sign Up, Login, Forgot Password). The demo highlights the product browsing experience, adding items to the cart, UI transitions, responsive design, and overall functionality of the website.
+
